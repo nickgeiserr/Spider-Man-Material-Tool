@@ -18,7 +18,22 @@ namespace Spider_Man_Material_Tool.Utils
 
             string text = reader.ReadToEnd();
 
+            reader.Close();
+
             if(text.Contains("Material Built File")) { return true; } 
+
+            return false;
+        }
+
+        public bool IsFileCorrupted(string file_path)
+        {
+            StreamReader reader = new StreamReader(file_path);
+
+            string text = reader.ReadToEnd();
+
+            reader.Close();
+
+            if (text.Contains("Update Material File")) { return true; }
 
             return false;
         }
@@ -30,6 +45,9 @@ namespace Spider_Man_Material_Tool.Utils
             StreamReader reader = new StreamReader(file_path);
 
             string text = reader.ReadToEnd();
+
+            reader.Close();
+
             Regex r = new Regex(@"[^a-zA-Z0-9.\/\\ _]");
             string parsed = r.Replace(text, " ");
 
@@ -39,13 +57,14 @@ namespace Spider_Man_Material_Tool.Utils
 
             for (var i = 0; i < arr.Length; i++)
             {
-                if(arr[i].Contains(@"\") || arr[i].Contains(@"/"))
+                if(arr[i].EndsWith(".texture"))
                 {
-
-                    if (arr[i].Contains("."))
-                    {
-                        graphs.Add(arr[i]);
-                    }
+                    graphs.Add(arr[i]);
+                } 
+                
+                else if (arr[i].EndsWith(".materialgraph"))
+                {
+                    graphs.Add(arr[i]);
                 }
             }
 

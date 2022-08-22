@@ -7,21 +7,23 @@
         xmlns:local="clr-namespace:Spider_Man_Material_Tool"
         mc:Ignorable="d"
         Title="Spider-Man Material Tool" Height="800" Width="1500">
+
+
+
     <Grid Background="#FF2D2D2D">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="77*"/>
             <ColumnDefinition Width="73*"/>
         </Grid.ColumnDefinitions>
-        <Label x:Name="title_text" HorizontalAlignment="Left" Margin="30,37,0,0" VerticalAlignment="Top" Height="67" Width="552" FontSize="45" FontFamily="Inter SemiBold" FontWeight="Normal" Background="{x:Null}">
-            <Label.Foreground>
-                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FFFF8585" Offset="0.5"/>
-                    <GradientStop Color="#FF504AFF" Offset="0.537"/>
-                </LinearGradientBrush>
-            </Label.Foreground> Spider-Man Material Tool
+        <Menu Margin="0,0,0,729" Grid.ColumnSpan="2">
+            <MenuItem Header="Texture Viewer">
+                <MenuItem Click="MenuItem_Click" Header="Open"/>
+            </MenuItem>
+        </Menu>
+        <Label x:Name="title_text" HorizontalAlignment="Left" Margin="30,37,0,0" VerticalAlignment="Top" Height="67" Width="552" FontSize="45" FontFamily="Gantari Medium" FontWeight="Bold" Background="{x:Null}" Foreground="White">Spider-Man Material Tool
         </Label>
-        <Separator HorizontalAlignment="Left" Margin="55,92,0,0" VerticalAlignment="Top" Height="58" Width="324" Background="#FFFF6262"/>
-        <Label x:Name="mg_text" Content="Material Values" HorizontalAlignment="Left" Margin="55,150,0,0" VerticalAlignment="Top" Foreground="White" Height="43" Width="266" FontFamily="Gantari Medium" FontSize="27" Background="{x:Null}"/>
+        <Separator HorizontalAlignment="Left" Margin="55,92,0,0" VerticalAlignment="Top" Height="58" Width="324" Background="#FFBBB9FF"/>
+        <Label x:Name="mg_text" Content="Values" HorizontalAlignment="Left" Margin="55,150,0,0" VerticalAlignment="Top" Foreground="White" Height="43" Width="81" FontFamily="Gantari Light" FontSize="27" Background="{x:Null}" FontWeight="Normal"/>
         <StackPanel x:Name="mg_panel" Margin="55,198,76,66" Grid.ColumnSpan="2">
             <ListBox x:Name="scoll" Height="520"/>
         </StackPanel>
@@ -33,6 +35,7 @@
              IsIndeterminate="True"
              Padding="0, 2" Margin="398,111,220,652" ValueChanged="ProgressBar_ValueChanged"/>
         <Button x:Name="select" Click="select_file_Click" Content="Select File" HorizontalAlignment="Left" Margin="398,110,0,0" VerticalAlignment="Top" Height="22" Width="152"/>
+        <Button x:Name="select_Copy" Click="select_Copy_Click" Content="Reload" HorizontalAlignment="Left" Margin="573,110,0,0" VerticalAlignment="Top" Height="22" Width="152"/>
 
     </Grid>
 </Window>

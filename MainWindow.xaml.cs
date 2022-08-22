@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.Win32;
+using Spider_Man_Material_Tool.Utils;
+using Spider_Man_Material_Tool.ViewModels;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.Win32;
-using Spider_Man_Material_Tool.Utils;
-using System.IO;
-using AdonisUI.Controls;
 
 namespace Spider_Man_Material_Tool
 {
@@ -26,12 +14,28 @@ namespace Spider_Man_Material_Tool
     {
         public MainWindow()
         {
+
+            Globals.Startup();
+
+            string patch_notes = "- Added Patch Notes lol \n" + "- Added NavBar \n" + "- Added Backing Up \n" + "- Added FileWriter \n" +
+                "- Added Texture Viewer";
+
             InitializeComponent();
             TextBlock blk = new TextBlock();
-            blk.Text = "Select a Material File to Begin!";
+            blk.Text = "You haven't selected a material so how about I show you some patch notes!";
             blk.Foreground = new SolidColorBrush(Colors.White);
             blk.FontSize = 15;
             scoll.Items.Add(blk);
+            TextBlock text = new TextBlock();
+            text.Text = patch_notes;
+            text.Foreground = new SolidColorBrush(Colors.White);
+            text.FontSize = 15;
+            scoll.Items.Add(text);
+            TextBlock refe = new TextBlock();
+            refe.Text = "If you encounter any errors or wanna suggest something, hmu on discord xplore#7500";
+            refe.Foreground = new SolidColorBrush(Colors.White);
+            refe.FontSize = 15;
+            scoll.Items.Add(refe);
         }
 
         private void select_file_Click(object sender, RoutedEventArgs e)
@@ -40,6 +44,7 @@ namespace Spider_Man_Material_Tool
 
             if (openFileDialog.ShowDialog() == true)
             {
+                Globals.current_file = openFileDialog.FileName;
                 RenderFile(openFileDialog.FileName);
             }
                 
@@ -70,10 +75,12 @@ namespace Spider_Man_Material_Tool
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
             for (var i = 0; i < m_obj.m_graphs.Length; i++)
             {
-                TextBlock blk = new TextBlock();
-                blk.Text = m_obj.m_graphs[i];
+                Button blk = new Button();
+                blk.Content = m_obj.m_graphs[i];
+                blk.Name = "listoption" + i;
                 blk.Foreground = new SolidColorBrush(Colors.White);
                 blk.FontSize = 15;
+                blk.Click += new RoutedEventHandler(btn_Click);
                 scoll.Items.Add(blk);
 
                 Separator sep = new Separator();
@@ -86,9 +93,69 @@ namespace Spider_Man_Material_Tool
 
         }
 
+        private void btn_Click(object sender, RoutedEventArgs e)
+        {
+            bool enabled = true;
+
+            if(enabled)
+            {
+                Button b = (Button)sender;
+
+                string text = (string)b.Content;
+
+                MaterialEditorObject meo = new MaterialEditorObject
+                {
+                    current_file = Globals.current_file,
+
+                    old_text = text
+                };
+
+                MaterialEditor me = new MaterialEditor(meo);
+
+                me.Show();
+
+            } else
+            {
+                AdonisUI.Controls.MessageBox.Show("The Material Editor is Currently Disabled. It has been disabled for this version.", "Module Disabled", AdonisUI.Controls.MessageBoxButton.OK);
+            }
+
+        }
+
         private void ProgressBar_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
 
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            bool enabled = false;
+
+            if(enabled)
+            {
+                MaterialViewer mv = new MaterialViewer();
+
+                mv.Show();
+            } 
+            else
+            {
+                AdonisUI.Controls.MessageBox.Show("The Texture Viewer is Currently In a Incomplete State. It has been disabled for this version.", "Module Disabled", AdonisUI.Controls.MessageBoxButton.OK);
+            }
+        }
+        private void Navigate_Click(object sender, RoutedEventArgs e)
+        {
+            MaterialViewer mv = new MaterialViewer();
+
+            mv.Show();
+        }
+
+        private void select_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            if(Globals.current_file == null)
+            {
+                AdonisUI.Controls.MessageBox.Show("No File Available To Reload", "Error", AdonisUI.Controls.MessageBoxButton.OKCancel);
+                return;
+            }
+            RenderFile(Globals.current_file);
         }
     }
 }

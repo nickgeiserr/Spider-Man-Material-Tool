@@ -1,0 +1,31 @@
+﻿<Window x:Class="Spider_Man_Material_Tool.ViewModels.MaterialViewer"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spider_Man_Material_Tool.ViewModels"
+        mc:Ignorable="d"
+        Title="Texture Viewer" Height="453" Width="778">
+    <Grid Background="#FF2B2B2B">
+        <Button Content="Select File" HorizontalAlignment="Left" Margin="31,44,0,0" VerticalAlignment="Top" Click="Button_Click" Height="30" Width="166"/>
+        <Separator HorizontalAlignment="Left" Margin="210,0,0,0" VerticalAlignment="Center" Height="280" Width="394" RenderTransformOrigin="0.5,0.5">
+            <Separator.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="90"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Separator.RenderTransform>
+        </Separator>
+        <Image x:Name="texture" HorizontalAlignment="Left" Height="225" Margin="480,0,0,0" VerticalAlignment="Center" Width="226" Source="/ViewModels/characters_hero_hero_spiderman_antiock_textures_hero_spiderman_antiock_emissive_c.png"/>
+        <Button x:Name="view32d" Content="View 3D" HorizontalAlignment="Left" Margin="480,349,0,0" VerticalAlignment="Top" Height="27" Width="97"/>
+        <TextBlock HorizontalAlignment="Left" Margin="31,291,0,0" TextWrapping="Wrap" Text="3D Settings" VerticalAlignment="Top" Height="26" Width="115" Foreground="White" FontSize="20" FontFamily="Gantari Medium"/>
+        <Separator HorizontalAlignment="Left" Margin="31,317,0,0" VerticalAlignment="Top" Height="32" Width="255"/>
+        <ComboBox x:Name="model" HorizontalAlignment="Left" Margin="31,349,0,0" VerticalAlignment="Top" Width="148">
+            <ComboBoxItem Content="Sphere"></ComboBoxItem>
+            <ComboBoxItem Content="Cube"></ComboBoxItem>
+            <ComboBoxItem Content="Custom Model"></ComboBoxItem>
+        </ComboBox>
+    </Grid>
+</Window>

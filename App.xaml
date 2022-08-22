@@ -11,6 +11,7 @@
                 <ResourceDictionary Source="pack://application:,,,/AdonisUI.ClassicTheme;component/Resources.xaml"/>
             </ResourceDictionary.MergedDictionaries>
 
+            <CornerRadius x:Key="{x:Static adonisUi:Dimensions.CornerRadius}">4</CornerRadius>
             <Color x:Key="{x:Static adonisUi:Colors.AccentColor}">#206BD4</Color>
             <Color x:Key="{x:Static adonisUi:Colors.AlertColor}">#D49220</Color>
             <Color x:Key="{x:Static adonisUi:Colors.ErrorColor}">#C22B2B</Color>

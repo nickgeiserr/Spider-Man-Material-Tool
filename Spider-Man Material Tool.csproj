@@ -9,8 +9,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="ViewModels\characters_hero_hero_spiderman_antiock_textures_hero_spiderman_antiock_emissive_c.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AdonisUI" Version="1.17.1" />
     <PackageReference Include="AdonisUI.ClassicTheme" Version="1.17.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="ViewModels\characters_hero_hero_spiderman_antiock_textures_hero_spiderman_antiock_emissive_c.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Models\" />
   </ItemGroup>
 
 </Project>

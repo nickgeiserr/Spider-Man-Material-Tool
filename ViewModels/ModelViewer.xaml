@@ -1,0 +1,16 @@
+﻿<adonisControls:AdonisWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                             xmlns:adonisUi="clr-namespace:AdonisUI;assembly=AdonisUI"
+                             xmlns:adonisControls="clr-namespace:AdonisUI.Controls;assembly=AdonisUI">
+
+    <adonisControls:AdonisWindow.TitleBarContent>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+            <Button Content="?"
+                    Style="{DynamicResource {x:Static adonisUi:Styles.WindowButton}}"
+                    FontFamily="Segoe UI"
+                    FontSize="14"/>
+        </StackPanel>
+    </adonisControls:AdonisWindow.TitleBarContent>
+
+</adonisControls:AdonisWindow>
