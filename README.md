@@ -16,5 +16,5 @@ The Material Viewer can be Reloaded with the Click of a Button!
 
 ![image](https://user-images.githubusercontent.com/82282004/186992237-8dc342eb-151a-4ba7-a445-1bf81e50fe63.png)
 
-https://i.imgur.com/41hhED7.gif
+![Alt Text](https://i.imgur.com/41hhED7.gif)
 
