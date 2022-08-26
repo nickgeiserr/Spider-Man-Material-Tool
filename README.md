@@ -14,7 +14,7 @@ The Material Editors allows you to replace any material value with a new one.
 
 Using the SMMT Filtering Tool, You can control which data gets displayed on screen!
 
-![image](https://user-images.githubusercontent.com/82282004/186993236-897997e8-43da-43a8-a0b0-a486eb42f7f4.png)
+![image](https://user-images.githubusercontent.com/82282004/186993493-0d10871d-365f-413e-ae68-b8716623ec0b.png)
 
 
 ## Hot Reload
