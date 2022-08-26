@@ -38,7 +38,7 @@ namespace Spider_Man_Material_Tool.Utils
             return false;
         }
 
-        public MaterialObject ParseMaterialFile(string file_path)
+        public void ParseMaterialFile(string file_path)
         {
             MaterialObject m_obj = new MaterialObject();
 
@@ -55,11 +55,13 @@ namespace Spider_Man_Material_Tool.Utils
 
             List<string> graphs = new List<string>();
 
+            List<string> textures = new List<string>();
+
             for (var i = 0; i < arr.Length; i++)
             {
                 if(arr[i].EndsWith(".texture"))
                 {
-                    graphs.Add(arr[i]);
+                    textures.Add(arr[i]);
                 } 
                 
                 else if (arr[i].EndsWith(".materialgraph"))
@@ -70,7 +72,9 @@ namespace Spider_Man_Material_Tool.Utils
 
             m_obj.m_graphs = graphs.ToArray();
 
-            return m_obj;
+            m_obj.m_textures = textures.ToArray();
+
+            Globals.m_obj = m_obj;
         }
     }
 }

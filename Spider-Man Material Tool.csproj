@@ -6,10 +6,15 @@
     <RootNamespace>Spider_Man_Material_Tool</RootNamespace>
     <Nullable>enable</Nullable>
     <UseWPF>true</UseWPF>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
     <None Remove="ViewModels\characters_hero_hero_spiderman_antiock_textures_hero_spiderman_antiock_emissive_c.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="icon.ico" />
   </ItemGroup>
 
   <ItemGroup>

@@ -15,27 +15,19 @@
             <ColumnDefinition Width="77*"/>
             <ColumnDefinition Width="73*"/>
         </Grid.ColumnDefinitions>
-        <Menu Margin="0,0,0,729" Grid.ColumnSpan="2">
-            <MenuItem Header="Texture Viewer">
-                <MenuItem Click="MenuItem_Click" Header="Open"/>
-            </MenuItem>
-        </Menu>
-        <Label x:Name="title_text" HorizontalAlignment="Left" Margin="30,37,0,0" VerticalAlignment="Top" Height="67" Width="552" FontSize="45" FontFamily="Gantari Medium" FontWeight="Bold" Background="{x:Null}" Foreground="White">Spider-Man Material Tool
+        <Label x:Name="title_text" HorizontalAlignment="Left" Margin="55,39,0,0" VerticalAlignment="Top" Height="67" Width="552" FontSize="40" FontFamily="Inter SemiBold" FontWeight="Bold" Background="{x:Null}" Foreground="White">Spider-Man Material Tool
         </Label>
         <Separator HorizontalAlignment="Left" Margin="55,92,0,0" VerticalAlignment="Top" Height="58" Width="324" Background="#FFBBB9FF"/>
-        <Label x:Name="mg_text" Content="Values" HorizontalAlignment="Left" Margin="55,150,0,0" VerticalAlignment="Top" Foreground="White" Height="43" Width="81" FontFamily="Gantari Light" FontSize="27" Background="{x:Null}" FontWeight="Normal"/>
-        <StackPanel x:Name="mg_panel" Margin="55,198,76,66" Grid.ColumnSpan="2">
-            <ListBox x:Name="scoll" Height="520"/>
+        <Label x:Name="mg_text" Content="Values" HorizontalAlignment="Left" Margin="55,150,0,0" VerticalAlignment="Top" Foreground="White" Height="43" Width="108" FontFamily="Inter Medium" FontSize="27" Background="{x:Null}" FontWeight="Normal"/>
+        <StackPanel x:Name="mg_panel" Margin="55,198,76,0" Grid.ColumnSpan="2">
+            <ListBox x:Name="scoll" Height="586"/>
         </StackPanel>
+        <Button x:Name="select" Click="select_file_Click" Content="Select File" HorizontalAlignment="Left" Margin="391,106,0,0" VerticalAlignment="Top" Height="30" Width="177"/>
+        <Button x:Name="select_Copy" Click="select_Copy_Click" Content="Reload" HorizontalAlignment="Left" Margin="583,106,0,0" VerticalAlignment="Top" Height="30" Width="177"/>
+        <StackPanel/>
 
-        <ProgressBar adonisExtensions:ProgressBarExtension.Content="Loading"
-             Minimum="0"
-             Value="70"
-             Maximum="100"
-             IsIndeterminate="True"
-             Padding="0, 2" Margin="398,111,220,652" ValueChanged="ProgressBar_ValueChanged"/>
-        <Button x:Name="select" Click="select_file_Click" Content="Select File" HorizontalAlignment="Left" Margin="398,110,0,0" VerticalAlignment="Top" Height="22" Width="152"/>
-        <Button x:Name="select_Copy" Click="select_Copy_Click" Content="Reload" HorizontalAlignment="Left" Margin="573,110,0,0" VerticalAlignment="Top" Height="22" Width="152"/>
+        <CheckBox x:Name="filterTexture" Content="Show Textures" HorizontalAlignment="Left" Margin="331,161,0,0" VerticalAlignment="Top" IsChecked="True" Click="filterClicked_Click" IsEnabled="False"/>
+        <CheckBox x:Name="filterGraphs" Content="Show Material Graphs" HorizontalAlignment="Left" Margin="168,161,0,0" VerticalAlignment="Top" IsChecked="True" Click="filterClicked_Click" IsEnabled="False"/>
 
     </Grid>
 </Window>

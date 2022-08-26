@@ -1,0 +1,13 @@
+﻿<Window x:Class="Spider_Man_Material_Tool.ViewModels.Loading"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Spider_Man_Material_Tool.ViewModels"
+        mc:Ignorable="d"
+        Title="Loading" Height="250" Width="540">
+    <Grid Background="#FF353535">
+        <ProgressBar HorizontalAlignment="Center" Height="30" Margin="0,147,0,0" VerticalAlignment="Top" Width="377" IsIndeterminate="True" Foreground="#FF93D5FF"/>
+        <Label x:Name="ll" Content="Loading..." HorizontalAlignment="Center" Margin="0,74,0,0" VerticalAlignment="Top" FontFamily="Inter SemiBold" FontSize="45"/>
+    </Grid>
+</Window>

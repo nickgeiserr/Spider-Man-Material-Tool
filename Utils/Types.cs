@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Spider_Man_Material_Tool.Utils
 {
-    class MaterialObject
+    public class MaterialObject
     {
         public string[]? m_graphs { get; set; }
-        public string[]? m_materials { get; set; }
+        public string[]? m_textures { get; set; }
     }
 
     public class MaterialEditorObject

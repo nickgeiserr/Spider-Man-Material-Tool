@@ -17,8 +17,7 @@ namespace Spider_Man_Material_Tool
 
             Globals.Startup();
 
-            string patch_notes = "- Added Patch Notes lol \n" + "- Added NavBar \n" + "- Added Backing Up \n" + "- Added FileWriter \n" +
-                "- Added Texture Viewer";
+            string patch_notes = "- nothing rn \n";
 
             InitializeComponent();
             TextBlock blk = new TextBlock();
@@ -45,52 +44,97 @@ namespace Spider_Man_Material_Tool
             if (openFileDialog.ShowDialog() == true)
             {
                 Globals.current_file = openFileDialog.FileName;
-                RenderFile(openFileDialog.FileName);
+
+                HandleFile();
+
+                if (Globals.m_obj.m_graphs.Length == 0 || Globals.m_obj.m_textures.Length == 0)
+                {
+                    return;
+                }
+
+                filterGraphs.IsEnabled = true;
+                filterTexture.IsEnabled = true;
+
+                RenderFile();
             }
                 
         }
 
-        void RenderFile(string text)
+        void HandleFile()
         {
-            scoll.Items.Clear();
-
             FileParser parser = new FileParser();
-            if(!parser.VerifyFile(text))
+            if (!parser.VerifyFile(Globals.current_file))
             {
                 AdonisUI.Controls.MessageBox.Show("Failed to Verify", "Material Header not Found in File.", AdonisUI.Controls.MessageBoxButton.OKCancel);
             }
 
-            MaterialObject m_obj;
+            parser.ParseMaterialFile(Globals.current_file);
+        }
 
-            m_obj = parser.ParseMaterialFile(text);
+        void RenderFile()
+        {
+            scoll.Items.Clear();
 
-            if (m_obj.m_graphs.Length == 0)
+            if (Globals.m_obj != null)
             {
-                return;
+                Globals.renderTexture = (bool)filterTexture.IsChecked;
+                if (Globals.renderTexture)
+                {
+                    RenderTextures();
+                }
+                Globals.renderGraphs = (bool)filterGraphs.IsChecked;
+                if (Globals.renderGraphs)
+                {
+                    RenderMaterialGraphs();
+                }
             }
 
-            select.IsEnabled = false;
-            select.Opacity = 0;
+        }
+
+        private void RenderMaterialGraphs()
+        {
+            if (Globals.m_obj.m_graphs.Length == 0) return;
 
 #pragma warning disable CS8602 // Dereference of a possibly null reference.
-            for (var i = 0; i < m_obj.m_graphs.Length; i++)
+            for (var i = 0; i < Globals.m_obj.m_graphs.Length; i++)
             {
+
                 Button blk = new Button();
-                blk.Content = m_obj.m_graphs[i];
+                blk.Content = Globals.m_obj.m_graphs[i];
                 blk.Name = "listoption" + i;
                 blk.Foreground = new SolidColorBrush(Colors.White);
                 blk.FontSize = 15;
+                blk.FontFamily = new FontFamily("Inter Medium");
                 blk.Click += new RoutedEventHandler(btn_Click);
+
                 scoll.Items.Add(blk);
 
                 Separator sep = new Separator();
 
                 scoll.Items.Add(sep);
             }
+        }
 
-            select.IsEnabled = true;
-            select.Opacity = 100;
+        private void RenderTextures()
+        {
 
+            for (var i = 0; i < Globals.m_obj.m_textures.Length; i++)
+            {
+
+                Button blk = new Button();
+                blk.Content = Globals.m_obj.m_textures[i];
+                blk.Name = "listoption" + i;
+                blk.Foreground = new SolidColorBrush(Colors.White);
+                blk.FontSize = 15;
+                blk.FontFamily = new FontFamily("Inter Medium");
+                blk.Click += new RoutedEventHandler(btn_Click);
+
+                scoll.Items.Add(blk);
+
+                Separator sep = new Separator();
+
+                scoll.Items.Add(sep);
+            }
         }
 
         private void btn_Click(object sender, RoutedEventArgs e)
@@ -99,6 +143,13 @@ namespace Spider_Man_Material_Tool
 
             if(enabled)
             {
+                if(!Globals.hasShownTestingME)
+                {
+                    AdonisUI.Controls.MessageBox.Show("The Editor is currently In-Development. Your File May Corrupt After You Edit It. Make Sure to Enable the Backup. You Will Only See This Message Once Per Lifetime.", "Warning", AdonisUI.Controls.MessageBoxButton.OK, AdonisUI.Controls.MessageBoxImage.Warning);
+                    Globals.hasShownTestingME = true;
+                }
+
+
                 Button b = (Button)sender;
 
                 string text = (string)b.Content;
@@ -116,7 +167,7 @@ namespace Spider_Man_Material_Tool
 
             } else
             {
-                AdonisUI.Controls.MessageBox.Show("The Material Editor is Currently Disabled. It has been disabled for this version.", "Module Disabled", AdonisUI.Controls.MessageBoxButton.OK);
+                AdonisUI.Controls.MessageBox.Show("The Material Editor is Currently Disabled. It has been disabled for this version.", "Module Disabled", AdonisUI.Controls.MessageBoxButton.OK, AdonisUI.Controls.MessageBoxImage.Stop);
             }
 
         }
@@ -138,7 +189,7 @@ namespace Spider_Man_Material_Tool
             } 
             else
             {
-                AdonisUI.Controls.MessageBox.Show("The Texture Viewer is Currently In a Incomplete State. It has been disabled for this version.", "Module Disabled", AdonisUI.Controls.MessageBoxButton.OK);
+                AdonisUI.Controls.MessageBox.Show("The Texture Viewer is Currently In a Incomplete State. It has been disabled for this version.", "Module Disabled", AdonisUI.Controls.MessageBoxButton.OK, AdonisUI.Controls.MessageBoxImage.Stop);
             }
         }
         private void Navigate_Click(object sender, RoutedEventArgs e)
@@ -152,10 +203,33 @@ namespace Spider_Man_Material_Tool
         {
             if(Globals.current_file == null)
             {
-                AdonisUI.Controls.MessageBox.Show("No File Available To Reload", "Error", AdonisUI.Controls.MessageBoxButton.OKCancel);
+                AdonisUI.Controls.MessageBox.Show("No File Available To Reload", "Error", AdonisUI.Controls.MessageBoxButton.OKCancel, AdonisUI.Controls.MessageBoxImage.Error);
                 return;
             }
-            RenderFile(Globals.current_file);
+            HandleFile();
+            RenderFile();
+        }
+
+        private void filterGraphs_Checked(object sender, RoutedEventArgs e)
+        {
+            if(Globals.m_obj != null)
+            {
+                Globals.renderGraphs = !Globals.renderGraphs;
+                if (Globals.renderGraphs)
+                {
+                    RenderMaterialGraphs();
+                }
+            }
+        }
+
+        private void filterTexture_Checked(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void filterClicked_Click(object sender, RoutedEventArgs e)
+        {
+            RenderFile();
         }
     }
 }
